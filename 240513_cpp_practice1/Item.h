@@ -7,8 +7,6 @@
 
 using namespace std;
 
-//**** 인벤 기능 필요 **** 현재 가지고 있는 포션 현황 및 사용 기능
-
 struct ItemInfo
 {
 	string name;

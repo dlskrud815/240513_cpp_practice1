@@ -27,7 +27,7 @@ int main()
 		case 2:
 			random = Random(10);
 
-			if (random > 7) //30%
+			if (random > 7) //30% -> 이게 맞나? 랜덤 분포 손 봐야 할 듯
 			{
 				//아이템 드롭
 				
