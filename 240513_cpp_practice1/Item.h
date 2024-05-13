@@ -10,7 +10,7 @@ using namespace std;
 struct ItemInfo
 {
 	string name;
-	float recoveryChance; //포션 회복 확률
+	float recoveryChance = 0; //포션 회복 확률
 };
 
 class Item
@@ -19,35 +19,39 @@ public:
 	// 초기 생성자 실행 시 아이템 벡터 생성 후 데이터 넣기
 	Item()
 	{
-		// 수정중~~~~~
+		string line;
 		ifstream itemData("ItemData.txt");
 
-		itemType_num = 0;
+		this->itemType_num = 0;
 		while (getline(itemData, line))
 		{
-			stringstream ss(line);
-			ss >> itemInfo[itemType_num].name >> itemInfo[itemType_num].recoveryChance;
-			itemType_num++;
+			this->itemType_num++;
 		}
 
-		monsterData.clear(); // 스트림의 상태 초기화
-		monsterData.seekg(0); // 파일 포인터를 파일의 시작으로 이동
-		this->monsterInfo.resize(monsterType_num);
+		itemData.clear(); // 스트림의 상태 초기화
+		itemData.seekg(0); // 파일 포인터를 파일의 시작으로 이동
+		this->itemInfo.resize(itemType_num);
 
+		this->itemType_num = 0;
 		while (getline(itemData, line))
 		{
 			stringstream ss(line);
-			ss >> itemInfo[itemType_num].name >> itemInfo[itemType_num].recoveryChance;
-			itemType_num++;
+			ss >> this->itemInfo[this->itemType_num].name >> this->itemInfo[this->itemType_num].recoveryChance;
+			this->itemType_num++;
 		}
 
 		itemData.close();
 	}
 
+	int getItemType_num() { return this->itemType_num; }
+	string getCurrentItemName() { return this->currentItem.name; }
+	ItemInfo getCurrentItem() { return this->currentItem; }
+
+	void setCurrentItem();
 
 private:
 	int itemType_num;
 	vector <ItemInfo> itemInfo;
 
-	string line;
+	ItemInfo currentItem;
 };

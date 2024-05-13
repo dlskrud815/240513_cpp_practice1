@@ -30,7 +30,8 @@ int main()
 			{
 				//아이템 드롭
 				Item item;
-				cout << endl << "New! 새로운 아이템을 얻었습니다" << endl;
+				item.setCurrentItem();
+				cout << endl << "New!" << item.getCurrentItemName() << "(아이템)을 얻었습니다" << endl;
 			}
 			else //70%
 			{
