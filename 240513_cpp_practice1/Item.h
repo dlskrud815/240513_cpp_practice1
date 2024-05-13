@@ -7,10 +7,13 @@
 
 using namespace std;
 
+//**** 인벤 기능 필요 **** 현재 가지고 있는 포션 현황 및 사용 기능
+
 struct ItemInfo
 {
 	string name;
 	float recoveryChance = 0; //포션 회복 확률
+	int count = 0;
 };
 
 class Item
@@ -47,6 +50,9 @@ public:
 	string getCurrentItemName() { return this->currentItem.name; }
 	ItemInfo getCurrentItem() { return this->currentItem; }
 
+	vector <ItemInfo> getInventoryStatus() { return this->itemInfo; }
+	
+	void setInventoryStatus();
 	void setCurrentItem();
 
 private:
