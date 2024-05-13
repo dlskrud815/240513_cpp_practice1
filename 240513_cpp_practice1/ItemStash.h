@@ -14,11 +14,11 @@ struct ItemInfo
 	int count = 0;
 };
 
-class Item
+class ItemStash
 {
 public:
 	// 초기 생성자 실행 시 아이템 벡터 생성 후 데이터 넣기
-	Item()
+	ItemStash()
 	{
 		string line;
 		ifstream itemData("ItemData.txt");

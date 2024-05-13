@@ -1,5 +1,24 @@
 #include "Character.h"
+#include "Function.h"
 
+bool Character::canGiveUp()
+{
+	if (Random(2) == 1) //1이면
+	{
+		return false; //도망실패
+	}
+	else //2이면
+	{
+		return true; //도망성공
+	}
+}
+
+void fightMonster()
+{
+
+}
+
+/*
 int Character::ManipulateCharacter(int option)
 {
 	string name;
@@ -42,3 +61,4 @@ int Character::ManipulateCharacter(int option)
 	}
 	return option;
 }
+*/

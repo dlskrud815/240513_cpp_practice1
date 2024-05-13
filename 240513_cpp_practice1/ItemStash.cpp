@@ -1,7 +1,7 @@
-#include "Item.h"
+#include "ItemStash.h"
 #include "Function.h"
 
-void Item::setCurrentItem()
+void ItemStash::setCurrentItem()
 {
 	int type = Random(getItemType_num()) - 1;
 
@@ -9,12 +9,12 @@ void Item::setCurrentItem()
 	this->currentItem.recoveryChance = this->itemInfo[type].recoveryChance;
 }
 
-void Item::setInventoryStatus()
+void ItemStash::setInventoryStatus()
 {
 	int i = 0;
 	for (ItemInfo item : this->itemInfo)
 	{
-		if (Item::getCurrentItem().name == item.name)
+		if (ItemStash::getCurrentItem().name == item.name)
 		{
 			this->itemInfo[i].count = this->itemInfo[i].count + 1;
 		}

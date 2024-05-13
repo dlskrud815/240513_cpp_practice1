@@ -130,13 +130,13 @@
     <ClCompile Include="240513_cpp_practice1.cpp" />
     <ClCompile Include="Character.cpp" />
     <ClCompile Include="Function.cpp" />
-    <ClCompile Include="Item.cpp" />
+    <ClCompile Include="ItemStash.cpp" />
     <ClCompile Include="Monster.cpp" />
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="Character.h" />
     <ClInclude Include="Function.h" />
-    <ClInclude Include="Item.h" />
+    <ClInclude Include="ItemStash.h" />
     <ClInclude Include="Monster.h" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />

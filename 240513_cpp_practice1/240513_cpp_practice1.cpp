@@ -1,8 +1,8 @@
 ﻿#include <iostream>
 
-//#include "Character.h"
+#include "Character.h"
 #include "Monster.h"
-#include "Item.h"
+#include "ItemStash.h"
 #include "Function.h"
 
 using namespace std;
@@ -10,8 +10,10 @@ using namespace std;
 int main()
 {
 	int option, random;
-	Item item;
+	ItemStash item;
 	Monster monster;
+	Character character("기본");
+
 	cout << "** 몬헌 **" << endl;
 
 	while (1)
@@ -54,6 +56,36 @@ int main()
 				
 				monster.setCurrentMonster();
 				cout << endl << "!!! " << monster.getCurrentMonsterName() << "(몬스터)와 마주쳤습니다" << endl;
+				cout << endl << "1)싸운다 2)도망친다" << endl << "- 선택: ";
+				cin >> option;
+				
+				bool breakCheck = false;
+				while (1)
+				{
+					if (breakCheck) break;
+
+					switch (option)
+					{
+					case 1:
+						//몬스터와 싸운다
+						cout << endl << "[전투]" << endl;
+						character.fightMonster();
+						breakCheck = true;
+						break;
+					case 2:
+						if (character.canGiveUp())
+						{
+							cout << "몬스터로 부터 도망치는데 성공했습니다!" << endl;
+							breakCheck = true;
+							break; //도망성공
+						}
+						else
+						{
+							cout << "몬스터로 부터 도망치는데 실패했습니다" << endl;
+							option = 1; //도망실패
+						}
+					}
+				}
 			}
 			break;
 		case 0:

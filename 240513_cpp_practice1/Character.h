@@ -15,7 +15,7 @@ public:
 		this->hp = 0;
 	}
 
-	int ManipulateCharacter(int option);
+	//int ManipulateCharacter(int option);
 
 	string getName() { return this->name; }
 	int getLevel() { return this->level; }
@@ -28,7 +28,8 @@ public:
 	void setGetItem(int item_num) { this->item_num = item_num + 1; }
 	void setUseItem(int item_num) { this->item_num = item_num - 1; }
 
-	void attackMonster();
+	bool canGiveUp();
+	void fightMonster();
 
 private:
 	string name;
