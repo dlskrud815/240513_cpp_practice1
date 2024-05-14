@@ -21,3 +21,15 @@ void ItemStash::setInventoryStatus()
 		i++;
 	}
 }
+
+int ItemStash::getTotalItem_num()
+{
+	int total = 0;
+
+	for (ItemInfo item : this->itemInfo)
+	{
+		total = total + item.count;
+	}
+
+	return total;
+}

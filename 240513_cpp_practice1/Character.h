@@ -1,43 +1,50 @@
 #pragma once
+
+#include "ItemStash.h"
+
 #include <iostream>
+#include <vector>
+#include <string>
+#include <fstream>
+#include <Windows.h>
+#include <conio.h>
 
 using namespace std;
+
+struct CharacterInfo
+{
+	string name;
+	int level = 0;
+	int item_num = 0;
+	int dealDamage = 50;
+	int exp = 0;
+	int hp = 200;
+};
 
 class Character
 {
 public:
 	Character(string name)
 	{
-		this->name = name;
-		this->level = 0;
-		this->item_num = 0;
-		this->exp = 0;
-		this->hp = 0;
+		this->characterInfo.name = name;
 	}
 
-	//int ManipulateCharacter(int option);
+	CharacterInfo getCharacterInfo() { return this->characterInfo; }
+	
+	void setCharacterName(string name) { this->characterInfo.name = name; }
+	void setCharacterItem_num(int total) { this->characterInfo.item_num = total; }
+	void setCharacterExpUp() { this->characterInfo.exp = this->characterInfo.exp + 50; }
+	void resetCharacterExpUp() { this->characterInfo.exp = 0; }
+	void setCharacterLevelUp() { this->characterInfo.level = this->characterInfo.level + 1; }
 
-	string getName() { return this->name; }
-	int getLevel() { return this->level; }
-	int getItem_num() { return this->item_num; }
-	int getExp() { return this->exp; }
-	int getHp() { return this->hp; }
-
-	void setName(string name) { this->name = name; }
-	void setLevelUp(int level) { this->level = level + 1; }
-	void setGetItem(int item_num) { this->item_num = item_num + 1; }
-	void setUseItem(int item_num) { this->item_num = item_num - 1; }
+	int getCharacterLevel() { return this->characterInfo.level; }
+	int getCharacterExp() { return this->characterInfo.exp; }
 
 	bool canGiveUp();
-	void fightMonster();
+	int fightMonster(ItemStash item);
 
 private:
-	string name;
-	int level;
-	int item_num;
-
-	int hp;
-	int exp;
+	CharacterInfo characterInfo;
 
 	int option;
 };

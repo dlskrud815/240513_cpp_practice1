@@ -44,15 +44,18 @@ public:
 		itemData.close();
 	}
 
+	int getTotalItem_num();
 	int getItemType_num() { return this->itemType_num; }
 	string getCurrentItemName() { return this->currentItem.name; }
 	ItemInfo getCurrentItem() { return this->currentItem; }
 
 	vector <ItemInfo> getInventoryStatus() { return this->itemInfo; }
-	
+
+	void useItem(int num) { this->itemInfo[num].count = this->itemInfo[num].count - 1; }
 	void setInventoryStatus();
 	void setCurrentItem();
 
+private:
 private:
 	int itemType_num;
 	vector <ItemInfo> itemInfo;
