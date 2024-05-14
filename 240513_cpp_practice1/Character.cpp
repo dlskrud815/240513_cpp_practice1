@@ -31,7 +31,7 @@ int Character::fightMonster(ItemStash item)
 		cout << endl << "플레이어: 네가 먼저다!" << endl;
 	}
 
-	Sleep(500);
+	Sleep(1000);
 
 	cout << endl << "몬스터: 그 전에 게임 하나 해보지 않겠나?" << endl << "\t만약 이긴다면 두배 공격을 허락해주지." << endl << endl << "1)홀 2)짝" << endl
 		<< "- 선택: ";
@@ -40,12 +40,12 @@ int Character::fightMonster(ItemStash item)
 	if (CheckEvenOdd(choice)) //맞힘
 	{
 		damage = 2;
-		cout << endl << "쳇 정답이군." << endl;
+		cout << endl << "몬스터: 쳇 정답이군." << endl;
 	}
 	else //틀림
 	{
 		damage = 1;
-		cout << endl << "훗 틀렸다." << endl;
+		cout << endl << "몬스터: 훗 틀렸다." << endl;
 	}
 	
 	ifstream fightInfo("FightInfo.txt");
@@ -70,6 +70,7 @@ int Character::fightMonster(ItemStash item)
 	while (1)
 	{
 		int my_item_num = stoi(v_fightInfo[7]);
+		//cout << endl << "아이템 수: " << my_item_num << endl;
 
 		int my_hp = stoi(v_fightInfo[9]);
 		int monster_hp = stoi(v_fightInfo[1]);
@@ -80,9 +81,11 @@ int Character::fightMonster(ItemStash item)
 		//몬스터 hp가 다 닳거나 내 hp가 다 닳음
 		if (my_hp <= 0 || monster_hp <= 0)
 		{
-			cout << endl << "[전투 종료]" << endl;
+			Sleep(1000);
 
-			if (my_hp < 0)
+			cout << endl << "----- 전투 종료 -----" << endl << endl;
+
+			if (my_hp <= 0)
 			{
 				return 1;
 			}
@@ -112,11 +115,13 @@ int Character::fightMonster(ItemStash item)
 
 			v_fightInfo[1] = to_string(monster_hp - my_damage);
 
-			cout << endl << "- 플레이어 턴: " << v_fightInfo[0] << "(몬스터)이 데미지" << my_damage << "의 공격을 받았다." << endl;
+			cout << endl << "- 플레이어 턴: " << v_fightInfo[0] << "(몬스터)에게 데미지" << my_damage << "의 피해를 입혔다." << endl;
 
 			if (stoi(v_fightInfo[1]) <= 0)
 			{
-				cout << "몬스터 잔여 HP: 0" << endl;
+				cout << "!!!\n\n" << endl;
+				Sleep(1000);
+				cout << "\"몬스터 잔여 HP: 0\"" << endl;
 			}
 			else
 			{
@@ -136,7 +141,9 @@ int Character::fightMonster(ItemStash item)
 			cout << endl << "- 몬스터 턴: " << v_fightInfo[5] << "(플레이어)는 데미지" << monster_damage << "의 공격을 받았다." << endl;
 			if (stoi(v_fightInfo[9]) <= 0)
 			{
-				cout << "플레이어 잔여 HP: 0" << endl;
+				cout << "!!!\n\n" << endl;
+				Sleep(1000);
+				cout << "플레이어 잔여 HP: 0\"" << endl;
 			}
 			else
 			{
@@ -164,7 +171,7 @@ int Character::fightMonster(ItemStash item)
 					v_fightInfo[9] = to_string(stoi(v_fightInfo[9]) + recovery);
 					v_fightInfo[7] = to_string(stoi(v_fightInfo[7]) - 1);
 
-					cout << endl << "** 플레이어 HP +" << recovery << " **" << endl << "----------------------" << endl;
+					cout << endl << "\"플레이어 HP +" << recovery << "\"" << endl << endl << "----------------------" << endl;
 					Sleep(500);
 					break;
 				case 2:
@@ -201,7 +208,7 @@ int selectItem(ItemStash item)
 {
 	//아이템
 	int option, result = 0;
-	string line;
+	string line, line2;
 	vector <ItemInfo> v_item;
 
 	ifstream itemStatus("ItemStatus.txt");
@@ -231,19 +238,45 @@ int selectItem(ItemStash item)
 	i = 0;
 	for (ItemInfo item : v_item)
 	{
-		cout << endl << i + 1 << ". " << item.name << endl
-			<< "- 효능: HP +" << item.recoveryChance * 100 << endl
-			<< "- 개수: " << item.count << "개" << endl;
-		i++;
+		if (item.count > 0)
+		{
+			cout << endl << i + 1 << ". " << item.name << endl
+				<< "- 효능: HP +" << item.recoveryChance * 100 << endl
+				<< "- 개수: " << item.count << "개" << endl;
+			i++;
+		}
 	}
 	cout << endl << "----------------------" << endl;
 
 	cout << endl << "사용할 아이템 번호를 입력해주세요" << endl << "- 선택: ";
 	cin >> option;
 
-	item.useItem(option - 1);
+	/*
+	line2 = "";
+	for (int i = 0; i < v_item.size(); i++)
+	{
+		if (i == option - 1)
+		{
+			line2 += v_item[i].name + " " + to_string(v_item[i].recoveryChance) + " " + to_string(v_item[i].count - 1) + "\n";
+		}
+		else
+		{
+			line2 += v_item[i].name + " " + to_string(v_item[i].recoveryChance) + " " + to_string(v_item[i].count) + "\n";
+		}
+	}
+	cout << endl << line2;
+;
+	ofstream itemStatus("ItemStatus.txt");
 
-	cout << endl << "----------------------" << endl << v_item[option - 1].name << "을 사용했습니다." << endl;
+	itemStatus << line2;
+
+	itemStatus.close();
+	*/
+
+	item.useItem(option - 1);
+	//cout << endl << "확인: " << item.getItemType_num() << endl;
+
+	cout << endl << "----------------------" << endl << endl << v_item[option - 1].name << "을 사용했습니다." << endl << endl;
 
 	result = v_item[option - 1].recoveryChance * 100;
 

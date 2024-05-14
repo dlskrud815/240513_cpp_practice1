@@ -42,6 +42,7 @@ int main()
 				break;
 			case 2:
 				cout << endl << "\"나와라 상태창!!!\"" << endl;
+				Sleep(500);
 
 				cout << endl << "----- 상태창 -----" << endl;
 				cout << endl << "이름: " << character.getCharacterInfo().name << endl
@@ -61,7 +62,7 @@ int main()
 			if (random > 7) //30% -> 이게 맞나? 랜덤 분포 손 봐야 할 듯
 			{
 				//아이템 드롭
-				
+				Sleep(500);
 				item.setCurrentItem();
 				cout << endl << "New!" << item.getCurrentItemName() << "(아이템)을 얻었습니다" << endl;
 				item.setInventoryStatus();
@@ -86,7 +87,7 @@ int main()
 
 				//인벤 확인
 				int i = 0;
-				cout << endl << "인벤토리 현황)" << endl;
+				cout << endl << "----- 인벤토리 -----" << endl;
 				for (ItemInfo item : item.getInventoryStatus())
 				{
 					if (item.count > 0)
@@ -96,6 +97,7 @@ int main()
 						i++;
 					}
 				}
+				cout << endl << "-------------------" << endl;
 			}
 			else //70%
 			{
@@ -144,11 +146,13 @@ int main()
 						{
 							cout << "- 몬스터 승 -" << endl << endl
 								<< "\"하하! 애송이 녀석.\"" << endl;
+							cout << endl << "--------------------" << endl;
 						}
 						else
 						{
 								cout << "- 플레이어 승 -" << endl << endl
 								<< "\"당연한 결과다.\"" << endl;
+								cout << endl << "--------------------" << endl;
 						}
 
 						character.setCharacterExpUp(); //전투 한번 당 경험치 50 상승
@@ -177,8 +181,9 @@ int main()
 						//레벨업
 						character.setCharacterLevelUp();
 
-						cout << endl << "** 레벨 업 **" << endl
+						cout << endl << "----- 레벨 업 -----" << endl << endl
 							<< "- 현재 레벨: " << character.getCharacterLevel() << endl;
+						cout << endl << "------------------" << endl;
 
 						//레벨업 후 경험치 초기화
 						character.resetCharacterExpUp();
