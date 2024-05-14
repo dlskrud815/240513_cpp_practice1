@@ -266,11 +266,11 @@ int selectItem(ItemStash item)
 	}
 	cout << endl << line2;
 ;
-	ofstream itemStatus("ItemStatus.txt");
+	ofstream itemStatus1("ItemStatus.txt");
 
-	itemStatus << line2;
+	itemStatus1 << line2;
 
-	itemStatus.close();
+	itemStatus1.close();
 	*/
 
 	item.useItem(option - 1);
